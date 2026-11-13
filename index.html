@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEIFU AI</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #101225;
+  color: white;
+  text-align: center;
+  padding: 25px;
+}
+h1 { color: #7c83ff; font-size: 36px; }
+.card {
+  background: #202443;
+  padding: 22px;
+  border-radius: 18px;
+  max-width: 420px;
+  margin: 25px auto;
+}
+input, textarea, button {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px;
+  margin-top: 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+}
+textarea { height: 100px; }
+button {
+  background: #777cff;
+  color: white;
+  font-weight: bold;
+}
+#preview {
+  max-width: 100%;
+  margin-top: 15px;
+  border-radius: 12px;
+}
+</style>
+</head>
+<body>
+<h1>SEIFU AI</h1>
+<p>Your Creative AI Assistant</p>
+
+<div class="card">
+<h2>AI Image Studio</h2>
+<p>Select a photo to preview</p>
+<input type="file" accept="image/*" id="photo">
+<img id="preview" hidden>
+<textarea id="prompt" placeholder="Describe the image you want to create..."></textarea>
+<button onclick="generate()">Generate Image</button>
+<p id="message">Welcome to SEIFU AI!</p>
+</div>
+
+<script>
+document.getElementById("photo").onchange = function(e) {
+  const file = e.target.files[0];
+  if(file) {
+    const preview = document.getElementById("preview");
+    preview.src = URL.createObjectURL(file);
+    preview.hidden = false;
+    document.getElementById("message").innerText = "Photo selected!";
+  }
+};
+
+function generate() {
+  const prompt = document.getElementById("prompt").value.trim();
+  if(!prompt) {
+    document.getElementById("message").innerText =
+      "Please describe your image first.";
+    return;
+  }
+  document.getElementById("message").innerText =
+    "Your request is ready. Connect an AI image API to generate images.";
+}
+</script>
+</body>
+</html>
